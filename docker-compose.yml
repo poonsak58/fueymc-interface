@@ -1,0 +1,7 @@
+version: '3'
+services:
+  fueymc-interface:
+    build: .
+    restart: always
+    network_mode: host
+    command: ["pm2", "serve", "build", "3000", "--spa"]
