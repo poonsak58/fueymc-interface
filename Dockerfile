@@ -10,6 +10,6 @@ FROM node:slim
 
 WORKDIR /app
 COPY --from=build /app/node_modules /app/node_modules
-COPY --from=build /app/dist /app/dist
+COPY --from=build /app/build /app/build
 RUN npm install -g serve pm2
 EXPOSE 3000
