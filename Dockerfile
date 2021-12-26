@@ -6,11 +6,9 @@ RUN npm install
 ADD . .
 RUN npm run build
 
-FROM node:slim
+FROM nginx:alpine
 
-WORKDIR /app
-COPY --from=build /app/node_modules /app/node_modules
-COPY --from=build /app/build /app/build
-RUN npm install -g serve pm2
-EXPOSE 3000
-CMD ["pm2", "serve", "build", "3000", "--spa"]
+WORKDIR /usr/share/nginx/html
+RUN rm -rf ./*
+COPY --from=build /app/build .
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
