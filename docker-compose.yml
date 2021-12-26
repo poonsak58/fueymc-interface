@@ -3,5 +3,6 @@ services:
   fueymc-interface:
     build: .
     restart: always
-    network_mode: host
-    command: ["pm2", "serve", "build", "3000", "--spa"]
+    # network_mode: host
+    ports:
+      - "${HOST:-127.0.0.1}:${PORT:-3000}:3000"
